@@ -11,7 +11,7 @@ Procedimentos de instalação da API 1.0 do Projeto Nossa Igreja.
 
 * **$ npm install -g loopback-cli** - Referência: [Installing](http://loopback.io/doc/en/lb3/Installation.html)
 
-### Precedimentos ###
+### Procedimentos ###
 
 * **$ git clone https://github.com/nossaigreja/api.git nossaigreja-api** (Clone o repositório)
 * **$ cd nossaigreja-api**
