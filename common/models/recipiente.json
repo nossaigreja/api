@@ -2,10 +2,6 @@
   "name": "Recipiente",
   "plural": "recipientes",
   "base": "Model",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
   "properties": {},
   "validations": [],
   "relations": {},
