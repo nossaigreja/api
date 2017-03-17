@@ -2,5 +2,27 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "email": {
+    "name": "email",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "me@private.com",
+          "pass": "password"
+        }
+      }
+    ]
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "storage",
+    "provider": "filesystem",
+    "root": "./server/storage"
   }
 }

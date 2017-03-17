@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
-    "lint": "eslint .",
-    "start": "node .",
+    "lint": "eslint --fix .",
+    "start": "pm2 start server/server.js --name=\"nossaigreja:1.0\"",
+    "start:dev": "export NODE_ENV=development && nodemon .",
+    "stop": "pm2 stop nossaigreja:1.0",
+    "test": "mocha",
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
@@ -14,13 +17,18 @@
     "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^4.0.0",
+    "loopback-component-storage": "^3.2.0",
     "serve-favicon": "^2.0.1",
+    "storage": "^0.2.0",
     "strong-error-handler": "^1.0.1"
   },
   "devDependencies": {
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
-    "nsp": "^2.1.0"
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0",
+    "nsp": "^2.1.0",
+    "pm2": "^2.4.2"
   },
   "repository": {
     "type": "",
