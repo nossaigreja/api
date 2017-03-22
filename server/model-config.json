@@ -43,5 +43,17 @@
   "Recipiente": {
     "dataSource": "storage",
     "public": true
+  },
+  "Physician": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Patient": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Appointment": {
+    "dataSource": "db",
+    "public": true
   }
 }

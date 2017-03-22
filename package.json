@@ -19,6 +19,7 @@
     "loopback-component-explorer": "^4.0.0",
     "loopback-component-storage": "^3.2.0",
     "loopback-storage-service": "^1.0.4",
+    "rootpath": "^0.1.2",
     "serve-favicon": "^2.0.1",
     "storage": "^0.2.0",
     "strong-error-handler": "^1.0.1"
