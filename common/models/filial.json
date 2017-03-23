@@ -1,0 +1,26 @@
+{
+  "name": "Filial",
+  "plural": "filials",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "matriz": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "instituicao": {
+      "type": "belongsTo",
+      "model": "Instituicao",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

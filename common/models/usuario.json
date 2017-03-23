@@ -9,10 +9,51 @@
   "properties": {
     "imagem": {
       "type": "string"
+    },
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "dtNascimento": {
+      "type": "date",
+      "required": true
+    },
+    "sexo": {
+      "type": "string",
+      "required": true
+    },
+    "dtCriacao": {
+      "type": "date",
+      "required": true
+    },
+    "dtAlteracao": {
+      "type": "date"
+    },
+    "dtRemocao": {
+      "type": "date"
     }
   },
+  "scope": {
+    "include": ["enderecos", "telefones"]
+  },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "filial": {
+      "type": "belongsTo",
+      "model": "Filial",
+      "foreignKey": ""
+    },
+    "enderecos": {
+      "type": "hasAndBelongsToMany",
+      "model": "Endereco",
+      "foreignKey": ""
+    },
+    "telefones": {
+      "type": "hasAndBelongsToMany",
+      "model": "Telefone",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -1,0 +1,39 @@
+{
+  "name": "Endereco",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "cep": {
+      "type": "string",
+      "required": true
+    },
+    "logradouro": {
+      "type": "string",
+      "required": true
+    },
+    "bairro": {
+      "type": "string"
+    },
+    "complemento": {
+      "type": "string"
+    }
+  },
+  "scope": {
+    "include": {
+      "relation": "enderecoTipo"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "enderecoTipo": {
+      "type": "belongsTo",
+      "model": "EnderecoTipo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
