@@ -1,0 +1,35 @@
+{
+  "name": "Telefone",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ddi": {
+      "type": "string"
+    },
+    "ddd": {
+      "type": "string"
+    },
+    "numero": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "scope": {
+    "include": {
+      "relation": "telefoneTipo"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "telefoneTipo": {
+      "type": "belongsTo",
+      "model": "TelefoneTipo",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

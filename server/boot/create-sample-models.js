@@ -1,60 +1,73 @@
 'use strict';
 
 require('rootpath')();
-//Cria o objeto de auxilo ao trabalho de migração de dados
-//var MigrateExtras = require('server/samples/db-migrate/util/migrate-extras.js');
+
+var fs = require('fs');
+var path = require("path");
+var upperCamelCase = require('uppercamelcase');
 
 module.exports = function (app) {
-
-  app.dataSources.db.automigrate('Physician', function (err) {
-    if (err) throw err;
-
-    app.models.Physician.create([
-      {
-        name: 'Physician - Bel Cafe'
-      }
-    ], function (err, physicians) {
-      if (err) throw err;
-
-      console.log('Models created: \n', physicians);
+    //Adiciona o diretório das amostras
+    var pathDir = path.join('server', 'samples');
+    //Lê todos os arquivos do diretório
+    fs.readdir(pathDir, function (err, files) {
+        if (err) throw err;
+        //Navega nos arquivos do diretório
+        for (var i in files) {
+            if (typeof files[i] === 'string') {
+                //Se for um arquivo do tipo JSON
+                if (path.extname(files[i]) === '.json') {
+                    //Obtêm o path do arquivo
+                    var filename = path.join(pathDir, path.basename(files[i]));
+                    //Obtêm o nome do modelo
+                    var modelname = upperCamelCase(path.basename(files[i], '.json'));
+                    //Cria a tabela e a popula com os dados do arquivo
+                    _create(app, filename, modelname);
+                }
+            }
+        }
     });
-  });
-
-  app.dataSources.db.automigrate('Patient', function (err) {
-    if (err) throw err;
-
-    app.models.Patient.create([
-      {
-        name: 'Patient - Bel Cafe'
-      }
-    ], function (err, patients) {
-      if (err) throw err;
-
-      console.log('Models created: \n', patients);
-    });
-  });
-
-  app.dataSources.db.automigrate('Appointment', function (err) {
-    if (err) throw err;
-
-    app.models.Appointment.create([
-      {
-        physicianId: 1,
-        patientId: 1,
-        appointmentDate: new Date()
-      }, {
-        physicianId: 1,
-        patientId: 1,
-        appointmentDate: new Date()
-      }, {
-        physicianId: 1,
-        patientId: 1,
-        appointmentDate: new Date()
-      },
-    ], function (err, appointments) {
-      if (err) throw err;
-
-      console.log('Models created: \n', appointments);
-    });
-  });
 };
+
+/**
+ * Cria a tabela e a popula com os dados do arquivo.
+ *
+ * @param app
+ * @param filename
+ * @param modelname
+ * @private
+ */
+function _create (app, filename, modelname) {
+    //Inicia o processo importação da massa de dados
+    app.dataSources.db.automigrate(modelname, function (err) {
+        if (err) throw err;
+        //Lê o arquivo json
+        var json = require(filename);
+        //Adiciona os dados na base de dados
+        app.models[modelname].create(json, function (err, model) {
+            if (err) throw err;
+            console.log('O modelo ' + modelname + ' foi criado com os dados: \n', model);
+
+            var relations = app.models[modelname].definition.settings.relations;
+
+            for (var r in relations) {
+                if (typeof relations[r] === 'object') {
+                    switch (relations[r].type) {
+                        case 'hasAndBelongsToMany':
+                    /**
+                     * TODO Ver como inserir o relacionamento N:N
+                     */
+                            //var relationModel = relations[r].model;
+                            //
+                            //app.models[relationModel].create(json[r], function (err, relation) {
+                            //    if (err) throw err;
+                            //
+                            //    console.log('O modelo ' + relationModel + ' foi criado com os dados: \n', relation);
+                            //});
+                            break;
+                    }
+                }
+            }
+        });
+    });
+}

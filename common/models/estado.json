@@ -1,0 +1,29 @@
+{
+  "name": "Estado",
+  "plural": "estados",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "sigla": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "pais": {
+      "type": "belongsTo",
+      "model": "Pais",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

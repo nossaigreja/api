@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "Herberts Cruz",
+    "dtNascimento": "1984-06-06",
+    "sexo": "M",
+    "dtCriacao": "2017-03-22",
+    "username": "herberts",
+    "email": "herbertscruz@gmail.com",
+    "password": "123456",
+    "filialId": 1,
+    "telefones": [
+      {
+        "ddi": "+55",
+        "ddd": "61",
+        "numero": "998761234",
+        "telefoneTipoId": 1
+      }
+    ]
+  }
+]

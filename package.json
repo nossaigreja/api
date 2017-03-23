@@ -22,7 +22,8 @@
     "rootpath": "^0.1.2",
     "serve-favicon": "^2.0.1",
     "storage": "^0.2.0",
-    "strong-error-handler": "^1.0.1"
+    "strong-error-handler": "^1.0.1",
+    "uppercamelcase": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^2.13.1",

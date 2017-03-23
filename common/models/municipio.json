@@ -1,0 +1,25 @@
+{
+  "name": "Municipio",
+  "plural": "municipios",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "nome": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "usuario": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

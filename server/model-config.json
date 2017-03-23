@@ -42,6 +42,42 @@
   },
   "Recipiente": {
     "dataSource": "storage",
+    "public": false
+  },
+  "Instituicao": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Filial": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Estado": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Municipio": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Pais": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Endereco": {
+    "dataSource": "db",
+    "public": false
+  },
+  "EnderecoTipo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Telefone": {
+    "dataSource": "db",
+    "public": false
+  },
+  "TelefoneTipo": {
+    "dataSource": "db",
     "public": true
   },
   "Physician": {
