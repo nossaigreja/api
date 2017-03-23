@@ -20,9 +20,9 @@ module.exports = function (app) {
                     //Obtêm o path do arquivo
                     var filename = path.join(pathDir, path.basename(files[i]));
                     //Obtêm o nome do modelo
-                    var modelname = upperCamelCase(path.basename(files[i], '.json'));
+                    var modelName = upperCamelCase(path.basename(files[i], '.json'));
                     //Cria a tabela e a popula com os dados do arquivo
-                    _create(app, filename, modelname);
+                    _create(app, filename, modelName);
                 }
             }
         }
@@ -34,40 +34,64 @@ module.exports = function (app) {
  *
  * @param app
  * @param filename
- * @param modelname
+ * @param modelName
  * @private
  */
-function _create (app, filename, modelname) {
+function _create (app, filename, modelName) {
     //Inicia o processo importação da massa de dados
-    app.dataSources.db.automigrate(modelname, function (err) {
+    app.dataSources.db.automigrate(modelName, function (err) {
         if (err) throw err;
         //Lê o arquivo json
         var json = require(filename);
         //Adiciona os dados na base de dados
-        app.models[modelname].create(json, function (err, model) {
+        app.models[modelName].create(json, function (err, data) {
             if (err) throw err;
-            console.log('O modelo ' + modelname + ' foi criado com os dados: \n', model);
-
-            var relations = app.models[modelname].definition.settings.relations;
-
-            for (var r in relations) {
-                if (typeof relations[r] === 'object') {
-                    switch (relations[r].type) {
+            console.log('O modelo ' + modelName + ' foi criado com os dados: \n', data);
+            //Navega nos dados retornados
+            for (var i in data) {
+              if (typeof data[i] === 'object') {
+                //Obtêm a instância do objeto
+                app.models[modelName].findById(data[i].id, function (err, model) {
+                  if (err) throw err;
+                  //Obtêm os relacionamento do modelo
+                  var relations = app.models[modelName].definition.settings.relations;
+                  for (var r in relations) {
+                    if (typeof relations[r] === 'object') {
+                      switch (relations[r].type) {
                         case 'hasAndBelongsToMany':
-                    /**
-                     * TODO Ver como inserir o relacionamento N:N
-                     */
-                            //var relationModel = relations[r].model;
-                            //
-                            //app.models[relationModel].create(json[r], function (err, relation) {
-                            //    if (err) throw err;
-                            //
-                            //    console.log('O modelo ' + relationModel + ' foi criado com os dados: \n', relation);
-                            //});
-                            break;
+                          for (var j in json) {
+                            if (typeof json[j] === 'object') {
+                              if (json[j][r]) {
+                                  var relationNameModel = relations[r].model;
+                                  //Tenta inserir os dados do relacionamento
+                                  _createRelation(model, r, relationNameModel, json[j][r]);
+                              }
+                            }
+                          }
+                          break;
+                      }
                     }
-                }
+                  }
+                });
+              }
             }
         });
     });
+}
+
+/**
+ * Cria a tabela e a popula com os dados do arquivo para o relacionamento.
+ *
+ * @param model
+ * @param relationName
+ * @param relationNameModel
+ * @param data
+ * @private
+ */
+function _createRelation (model, relationName, relationNameModel, data) {
+  //Tenta inserir os dados do relacionamento
+  model[relationName].create(data, function (err, relation) {
+      if (err) throw err;
+      console.log('O modelo ' + relationNameModel + ' foi criado com os dados: \n', relation);
+  });
 }

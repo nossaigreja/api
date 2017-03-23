@@ -6,6 +6,26 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": [
+      {
+        "relation": "enderecos",
+        "scope": {
+          "include": [
+            "enderecoTipo"
+          ]
+        }
+      },
+      {
+        "relation": "telefones",
+        "scope": {
+          "include": [
+            "telefoneTipo"
+          ]
+        }
+      }
+    ]
+  },
   "properties": {
     "imagem": {
       "type": "string"
@@ -32,9 +52,6 @@
     "dtRemocao": {
       "type": "date"
     }
-  },
-  "scope": {
-    "include": ["enderecos", "telefones"]
   },
   "validations": [],
   "relations": {

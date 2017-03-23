@@ -5,6 +5,11 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "enderecoTipo"
+    }
+  },
   "properties": {
     "cep": {
       "type": "string",
@@ -19,11 +24,6 @@
     },
     "complemento": {
       "type": "string"
-    }
-  },
-  "scope": {
-    "include": {
-      "relation": "enderecoTipo"
     }
   },
   "validations": [],

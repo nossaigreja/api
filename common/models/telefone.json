@@ -5,6 +5,11 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": {
+      "relation": "telefoneTipo"
+    }
+  },
   "properties": {
     "ddi": {
       "type": "string"
@@ -15,11 +20,6 @@
     "numero": {
       "type": "string",
       "required": true
-    }
-  },
-  "scope": {
-    "include": {
-      "relation": "telefoneTipo"
     }
   },
   "validations": [],
