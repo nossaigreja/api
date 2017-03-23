@@ -7,6 +7,14 @@
     "username": "herberts",
     "email": "herbertscruz@gmail.com",
     "password": "123456",
-    "filialId": 1
+    "filialId": 1,
+    "telefones": [
+      {
+        "ddi": "+55",
+        "ddd": "61",
+        "numero": "998761234",
+        "telefoneTipoId": 1
+      }
+    ]
   }
 ]

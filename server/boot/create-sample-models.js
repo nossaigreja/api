@@ -46,7 +46,28 @@ function _create (app, filename, modelname) {
         //Adiciona os dados na base de dados
         app.models[modelname].create(json, function (err, model) {
             if (err) throw err;
-            console.log('Models created: \n', model);
+            console.log('O modelo ' + modelname + ' foi criado com os dados: \n', model);
+
+            var relations = app.models[modelname].definition.settings.relations;
+
+            for (var r in relations) {
+                if (typeof relations[r] === 'object') {
+                    switch (relations[r].type) {
+                        case 'hasAndBelongsToMany':
+                    /**
+                     * TODO Ver como inserir o relacionamento N:N
+                     */
+                            //var relationModel = relations[r].model;
+                            //
+                            //app.models[relationModel].create(json[r], function (err, relation) {
+                            //    if (err) throw err;
+                            //
+                            //    console.log('O modelo ' + relationModel + ' foi criado com os dados: \n', relation);
+                            //});
+                            break;
+                    }
+                }
+            }
         });
     });
 }
