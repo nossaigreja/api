@@ -6,6 +6,13 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "__get__municipios"
+      ]
+    }
+  },
   "properties": {
     "nome": {
       "type": "string",
@@ -21,6 +28,11 @@
     "pais": {
       "type": "belongsTo",
       "model": "Pais",
+      "foreignKey": ""
+    },
+    "municipios": {
+      "type": "hasMany",
+      "model": "Municipio",
       "foreignKey": ""
     }
   },

@@ -26,6 +26,25 @@
       }
     ]
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "findById",
+        "find",
+        "create",
+        "updateAttributes",
+        "exists",
+        "confirm",
+        "count",
+        "login",
+        "logout",
+        "resetPassword",
+        "updatePassword",
+        "upload",
+        "download"
+      ]
+    }
+  },
   "properties": {
     "imagem": {
       "type": "string"
@@ -68,6 +87,11 @@
     "telefones": {
       "type": "hasAndBelongsToMany",
       "model": "Telefone",
+      "foreignKey": ""
+    },
+    "usuarioAcessos": {
+      "type": "hasMany",
+      "model": "UsuarioAcesso",
       "foreignKey": ""
     }
   },

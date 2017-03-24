@@ -6,6 +6,19 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "findById",
+        "find",
+        "create",
+        "updateAttributes",
+        "exists",
+        "count",
+        "__get__filials"
+      ]
+    }
+  },
   "properties": {
     "nome": {
       "type": "string",
@@ -16,7 +29,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "filials": {
+      "type": "hasMany",
+      "model": "Filial",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

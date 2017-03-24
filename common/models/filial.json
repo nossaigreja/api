@@ -6,6 +6,38 @@
   "options": {
     "validateUpsert": true
   },
+  "scope": {
+    "include": [
+      {
+        "relation": "endereco",
+        "scope": {
+          "include": [
+            "enderecoTipo"
+          ]
+        }
+      },
+      {
+        "relation": "telefones",
+        "scope": {
+          "include": [
+            "telefoneTipo"
+          ]
+        }
+      }
+    ]
+  },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "findById",
+        "find",
+        "create",
+        "updateAttributes",
+        "exists",
+        "count"
+      ]
+    }
+  },
   "properties": {
     "matriz": {
       "type": "boolean",
@@ -18,6 +50,16 @@
     "instituicao": {
       "type": "belongsTo",
       "model": "Instituicao",
+      "foreignKey": ""
+    },
+    "endereco": {
+      "type": "belongsTo",
+      "model": "Endereco",
+      "foreignKey": ""
+    },
+    "telefones": {
+      "type": "hasAndBelongsToMany",
+      "model": "Telefone",
       "foreignKey": ""
     }
   },

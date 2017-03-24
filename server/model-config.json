@@ -58,7 +58,7 @@
   },
   "Municipio": {
     "dataSource": "db",
-    "public": true
+    "public": false
   },
   "Pais": {
     "dataSource": "db",
@@ -79,5 +79,9 @@
   "TelefoneTipo": {
     "dataSource": "db",
     "public": true
+  },
+  "UsuarioAcesso": {
+    "dataSource": "db",
+    "public": false
   }
 }

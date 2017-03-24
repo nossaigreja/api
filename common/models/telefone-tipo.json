@@ -6,6 +6,13 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "find"
+      ]
+    }
+  },
   "properties": {
     "nome": {
       "type": "string",
