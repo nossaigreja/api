@@ -16,5 +16,23 @@
         "telefoneTipoId": 1
       }
     ]
+  },
+  {
+    "nome": "José Antônio",
+    "dtNascimento": "1990-01-20",
+    "sexo": "M",
+    "dtCriacao": "2017-03-22",
+    "username": "jose",
+    "email": "joseantonio@gmail.com",
+    "password": "123456",
+    "filialId": 2,
+    "telefones": [
+      {
+        "ddi": "+55",
+        "ddd": "61",
+        "numero": "998761234",
+        "telefoneTipoId": 1
+      }
+    ]
   }
 ]
