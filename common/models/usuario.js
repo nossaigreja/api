@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(Usuario) {
-
   var req;
   var res;
   /**
@@ -74,7 +73,7 @@ module.exports = function(Usuario) {
     //Obtêm a fução sem alteração
     var override = Usuario.prototype.updateAttributes;
     //Sobrescreve a função
-    Usuario.prototype.updateAttributes = function (data, cb) {
+    Usuario.prototype.updateAttributes = function(data, cb) {
       var $this = this;
       //Valida se enviou o endereço
       if (data.endereco) {
@@ -85,7 +84,7 @@ module.exports = function(Usuario) {
         });
         psTransation.then(function(tx) {
           //Observa se a transação demorou mais que o esperado
-          tx.observe('timeout', function (context, next) {
+          tx.observe('timeout', function(context, next) {
             try {
               cb('Timeout transaction');
             } catch (err) {
@@ -95,18 +94,18 @@ module.exports = function(Usuario) {
           });
           //Insere o endereço
           var psSaveEndereco = Usuario.app.models.Endereco.upsert(data.endereco, {transaction: tx});
-          psSaveEndereco.then(function (endereco) {
+          psSaveEndereco.then(function(endereco) {
             data.enderecoId = endereco.id;
             //Insere um grupo de cartões acessados
             var psUpdateUsuario = override.apply($this, [data, {transaction: tx}]);
-            psUpdateUsuario.then(function (usuario) {
+            psUpdateUsuario.then(function(usuario) {
               //Faz o commit da transação
-              tx.commit(function (err) {
+              tx.commit(function(err) {
                 if (err) return cb(err);
                 cb(null, usuario);
               });
             });
-            psUpdateUsuario.catch(function (err) {
+            psUpdateUsuario.catch(function(err) {
               //Faz o rollback da transação
               tx.rollback();
               cb(err);

@@ -1,3 +1,7 @@
 {
-  "extends": "loopback"
+  "extends": "loopback",
+  "rules": {
+    "max-len": [1, 120, 1],
+    "one-var": [2, "never"]
+  },
 }
