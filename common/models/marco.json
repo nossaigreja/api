@@ -1,6 +1,5 @@
 {
-  "name": "TelefoneTipo",
-  "plural": "telefonetipos",
+  "name": "Marco",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -15,15 +14,43 @@
       ]
     }
   },
-  "scope": {},
+  "scope": {
+    "include": [
+      {
+        "relation": "marcoTipo"
+      },
+      {
+        "relation": "usuario"
+      },
+      {
+        "relation": "instituicao"
+      }
+    ]
+  },
   "properties": {
-    "nome": {
-      "type": "string",
+    "dtMarco": {
+      "type": "date",
       "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "marcoTipo": {
+      "type": "belongsTo",
+      "model": "MarcoTipo",
+      "foreignKey": ""
+    },
+    "usuario": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": ""
+    },
+    "instituicao": {
+      "type": "belongsTo",
+      "model": "Instituicao",
+      "foreignKey": ""
+    }
+  },
   "acls": [
     {
       "accessType": "*",
@@ -34,21 +61,21 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$owner",
       "permission": "ALLOW",
       "property": "find"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$owner",
       "permission": "ALLOW",
       "property": "create"
     },
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$authenticated",
+      "principalId": "$owner",
       "permission": "ALLOW",
       "property": "deleteById"
     }

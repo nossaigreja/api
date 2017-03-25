@@ -6,6 +6,21 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": []
+    }
+  },
+  "scope": {
+    "include": {
+      "relation": "estado",
+      "scope": {
+        "include": {
+          "relation": "pais"
+        }
+      }
+    }
+  },
   "properties": {
     "nome": {
       "type": "string",
@@ -14,9 +29,9 @@
   },
   "validations": [],
   "relations": {
-    "usuario": {
+    "estado": {
       "type": "belongsTo",
-      "model": "Usuario",
+      "model": "Estado",
       "foreignKey": ""
     }
   },

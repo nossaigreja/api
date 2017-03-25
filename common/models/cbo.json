@@ -1,6 +1,6 @@
 {
-  "name": "Estado",
-  "plural": "estados",
+  "name": "Cbo",
+  "plural": "cbos",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,35 +9,29 @@
   "mixins": {
     "DisableAllMethods": {
       "expose": [
-        "__get__municipios"
+        "find"
       ]
     }
   },
   "scope": {
     "include": {
-      "relation": "pais"
+      "relation": "cboTipo"
     }
   },
   "properties": {
-    "nome": {
+    "codigo": {
       "type": "string",
       "required": true
     },
-    "sigla": {
-      "type": "string",
-      "required": true
+    "titulo": {
+      "type": "string"
     }
   },
   "validations": [],
   "relations": {
-    "pais": {
+    "cboTipo": {
       "type": "belongsTo",
-      "model": "Pais",
-      "foreignKey": ""
-    },
-    "municipios": {
-      "type": "hasMany",
-      "model": "Municipio",
+      "model": "CboTipo",
       "foreignKey": ""
     }
   },
@@ -51,9 +45,9 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": "__get__municipios"
+      "property": "find"
     }
   ],
   "methods": {}

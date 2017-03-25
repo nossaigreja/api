@@ -6,6 +6,18 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "findById",
+        "find",
+        "create",
+        "updateAttributes",
+        "exists",
+        "count"
+      ]
+    }
+  },
   "scope": {
     "include": [
       {
@@ -25,18 +37,6 @@
         }
       }
     ]
-  },
-  "mixins": {
-    "DisableAllMethods": {
-      "expose": [
-        "findById",
-        "find",
-        "create",
-        "updateAttributes",
-        "exists",
-        "count"
-      ]
-    }
   },
   "properties": {
     "matriz": {
@@ -76,6 +76,41 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "findById"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "updateAttributes"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "exists"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "count"
     }
   ],
   "methods": {}

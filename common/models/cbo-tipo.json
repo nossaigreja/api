@@ -1,6 +1,5 @@
 {
-  "name": "EnderecoTipo",
-  "plural": "enderecotipos",
+  "name": "CboTipo",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -8,11 +7,10 @@
   },
   "mixins": {
     "DisableAllMethods": {
-      "expose": [
-        "find"
-      ]
+      "expose": []
     }
   },
+  "scope": {},
   "properties": {
     "nome": {
       "type": "string",
@@ -27,13 +25,6 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "DENY"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW",
-      "property": "find"
     }
   ],
   "methods": {}

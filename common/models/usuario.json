@@ -6,26 +6,6 @@
   "options": {
     "validateUpsert": true
   },
-  "scope": {
-    "include": [
-      {
-        "relation": "enderecos",
-        "scope": {
-          "include": [
-            "enderecoTipo"
-          ]
-        }
-      },
-      {
-        "relation": "telefones",
-        "scope": {
-          "include": [
-            "telefoneTipo"
-          ]
-        }
-      }
-    ]
-  },
   "mixins": {
     "DisableAllMethods": {
       "expose": [
@@ -45,6 +25,7 @@
       ]
     }
   },
+  "scope": {},
   "properties": {
     "imagem": {
       "type": "string"
@@ -54,12 +35,10 @@
       "required": true
     },
     "dtNascimento": {
-      "type": "date",
-      "required": true
+      "type": "date"
     },
     "sexo": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "dtCriacao": {
       "type": "date",
@@ -70,6 +49,31 @@
     },
     "dtRemocao": {
       "type": "date"
+    },
+    "pai": {
+      "type": "string"
+    },
+    "mae": {
+      "type": "string"
+    },
+    "rg": {
+      "type": "string"
+    },
+    "rgOrgao": {
+      "type": "string"
+    },
+    "dtCasamento": {
+      "type": "date"
+    },
+    "observacao": {
+      "type": "string"
+    },
+    "pne": {
+      "type": "boolean",
+      "default": false
+    },
+    "cpf": {
+      "type": "string"
     }
   },
   "validations": [],
@@ -93,8 +97,66 @@
       "type": "hasMany",
       "model": "UsuarioAcesso",
       "foreignKey": ""
+    },
+    "naturalidade": {
+      "type": "belongsTo",
+      "model": "Municipio",
+      "foreignKey": "naturalidadeId"
+    },
+    "conjuge": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "conjugeId"
+    },
+    "estadoCivil": {
+      "type": "belongsTo",
+      "model": "EstadoCivil",
+      "foreignKey": ""
+    },
+    "profissao": {
+      "type": "belongsTo",
+      "model": "Cbo",
+      "foreignKey": "profissaoId"
+    },
+    "escolaridade": {
+      "type": "belongsTo",
+      "model": "Escolaridade",
+      "foreignKey": ""
+    },
+    "midiaSocials": {
+      "type": "hasAndBelongsToMany",
+      "model": "MidiaSocial",
+      "foreignKey": ""
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "updatePassword"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "upload"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "download"
+    }
+  ],
   "methods": {}
 }

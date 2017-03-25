@@ -1,6 +1,6 @@
 {
-  "name": "Estado",
-  "plural": "estados",
+  "name": "Escolaridade",
+  "plural": "escolaridades",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,38 +9,19 @@
   "mixins": {
     "DisableAllMethods": {
       "expose": [
-        "__get__municipios"
+        "find"
       ]
     }
   },
-  "scope": {
-    "include": {
-      "relation": "pais"
-    }
-  },
+  "scope": {},
   "properties": {
     "nome": {
-      "type": "string",
-      "required": true
-    },
-    "sigla": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "pais": {
-      "type": "belongsTo",
-      "model": "Pais",
-      "foreignKey": ""
-    },
-    "municipios": {
-      "type": "hasMany",
-      "model": "Municipio",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [
     {
       "accessType": "*",
@@ -51,9 +32,9 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$authenticated",
       "permission": "ALLOW",
-      "property": "__get__municipios"
+      "property": "find"
     }
   ],
   "methods": {}

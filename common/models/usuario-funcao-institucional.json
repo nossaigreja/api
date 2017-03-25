@@ -1,6 +1,6 @@
 {
-  "name": "UsuarioAcesso",
-  "plural": "Usuarioacessos",
+  "name": "UsuarioFuncaoInstitucional",
+  "plural": "usuariofuncaoinstitucionals",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,22 +9,24 @@
   "mixins": {
     "DisableAllMethods": {
       "expose": [
-        "find"
+        "find",
+        "create",
+        "deleteById"
       ]
     }
   },
   "scope": {
-    "include": {
-      "relation": "usuario"
-    }
+    "include": [
+      {
+        "relation": "usuario"
+      },
+      {
+        "relation": "funcaoInstituicao"
+      }
+    ]
   },
   "properties": {
-    "navegador": {
-      "type": "string",
-      "required": true,
-      "max": 200
-    },
-    "dtCriacao": {
+    "dtRecebimento": {
       "type": "date",
       "required": true
     }
@@ -34,6 +36,11 @@
     "usuario": {
       "type": "belongsTo",
       "model": "Usuario",
+      "foreignKey": ""
+    },
+    "funcaoInstituicao": {
+      "type": "belongsTo",
+      "model": "FuncaoInstituicao",
       "foreignKey": ""
     }
   },
@@ -50,6 +57,20 @@
       "principalId": "$owner",
       "permission": "ALLOW",
       "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
     }
   ],
   "methods": {}

@@ -1,9 +1,17 @@
 {
   "name": "Telefone",
+  "plural": "telefones",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
+  },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": [
+        "findById"
+      ]
+    }
   },
   "scope": {
     "include": {
@@ -20,6 +28,10 @@
     "numero": {
       "type": "string",
       "required": true
+    },
+    "whatsapp": {
+      "type": "boolean",
+      "default": false
     }
   },
   "validations": [],

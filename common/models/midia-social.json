@@ -1,6 +1,5 @@
 {
-  "name": "Estado",
-  "plural": "estados",
+  "name": "MidiaSocial",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -9,35 +8,33 @@
   "mixins": {
     "DisableAllMethods": {
       "expose": [
-        "__get__municipios"
+        "find",
+        "create",
+        "deleteById"
       ]
     }
   },
   "scope": {
     "include": {
-      "relation": "pais"
+      "relation": "midiaSocialTipo"
     }
   },
   "properties": {
-    "nome": {
-      "type": "string",
-      "required": true
-    },
-    "sigla": {
+    "url": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "pais": {
+    "midiaSocialTipo": {
       "type": "belongsTo",
-      "model": "Pais",
+      "model": "MidiaSocialTipo",
       "foreignKey": ""
     },
-    "municipios": {
-      "type": "hasMany",
-      "model": "Municipio",
+    "usuario": {
+      "type": "belongsTo",
+      "model": "Usuario",
       "foreignKey": ""
     }
   },
@@ -51,9 +48,23 @@
     {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
-      "principalId": "$everyone",
+      "principalId": "$owner",
       "permission": "ALLOW",
-      "property": "__get__municipios"
+      "property": "find"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": "deleteById"
     }
   ],
   "methods": {}

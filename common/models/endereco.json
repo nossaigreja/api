@@ -5,6 +5,11 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "DisableAllMethods": {
+      "expose": []
+    }
+  },
   "scope": {
     "include": {
       "relation": "enderecoTipo"

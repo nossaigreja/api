@@ -83,5 +83,49 @@
   "UsuarioAcesso": {
     "dataSource": "db",
     "public": false
+  },
+  "EstadoCivil": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Cbo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "CboTipo": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Escolaridade": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Marco": {
+    "dataSource": "db",
+    "public": false
+  },
+  "MarcoTipo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "MotivoEntrada": {
+    "dataSource": "db",
+    "public": true
+  },
+  "FuncaoInstituicao": {
+    "dataSource": "db",
+    "public": true
+  },
+  "UsuarioFuncaoInstitucional": {
+    "dataSource": "db",
+    "public": false
+  },
+  "MidiaSocialTipo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "MidiaSocial": {
+    "dataSource": "db",
+    "public": false
   }
 }
