@@ -25,7 +25,16 @@
       ]
     }
   },
-  "scope": {},
+  "scope": {
+    "include": [
+      {
+        "relation": "enderecos"
+      },
+      {
+        "relation": "telefones"
+      }
+    ]
+  },
   "properties": {
     "imagem": {
       "type": "string"
@@ -74,6 +83,10 @@
     },
     "cpf": {
       "type": "string"
+    },
+    "membrado": {
+      "type": "boolean",
+      "default": false
     }
   },
   "validations": [],
@@ -126,6 +139,11 @@
     "midiaSocials": {
       "type": "hasAndBelongsToMany",
       "model": "MidiaSocial",
+      "foreignKey": ""
+    },
+    "usuarioRecebimento": {
+      "type": "belongsTo",
+      "model": "UsuarioRecebimento",
       "foreignKey": ""
     }
   },

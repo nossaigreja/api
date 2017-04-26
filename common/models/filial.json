@@ -21,20 +21,13 @@
   "scope": {
     "include": [
       {
-        "relation": "endereco",
-        "scope": {
-          "include": [
-            "enderecoTipo"
-          ]
-        }
+        "relation": "instituicao"
       },
       {
-        "relation": "telefones",
-        "scope": {
-          "include": [
-            "telefoneTipo"
-          ]
-        }
+        "relation": "endereco"
+      },
+      {
+        "relation": "telefones"
       }
     ]
   },

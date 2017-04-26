@@ -4,28 +4,22 @@
     "dtNascimento": "1984-06-06",
     "sexo": "M",
     "dtCriacao": "2017-03-22",
-    "username": "herberts",
+    "username": "61998761234",
     "email": "herbertscruz@gmail.com",
     "password": "123456",
+    "membrado": true,
     "filialId": 1,
-    "telefones": [
+    "enderecos": [
       {
-        "ddi": "+55",
-        "ddd": "61",
-        "numero": "998761234",
-        "telefoneTipoId": 1
+        "cep": "73000000",
+        "logradouro": "Rua dos Programadores, 01",
+        "bairro": "Vale do Silício",
+        "complemento": "Recando dos NodeJS",
+        "enderecoTipoId": 1,
+        "municipioId": 1,
+        "usuarioRecebimentoId": 1
       }
-    ]
-  },
-  {
-    "nome": "José Antônio",
-    "dtNascimento": "1990-01-20",
-    "sexo": "M",
-    "dtCriacao": "2017-03-22",
-    "username": "jose",
-    "email": "joseantonio@gmail.com",
-    "password": "123456",
-    "filialId": 2,
+    ],
     "telefones": [
       {
         "ddi": "+55",

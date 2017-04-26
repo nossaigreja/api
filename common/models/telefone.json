@@ -8,9 +8,7 @@
   },
   "mixins": {
     "DisableAllMethods": {
-      "expose": [
-        "findById"
-      ]
+      "expose": []
     }
   },
   "scope": {

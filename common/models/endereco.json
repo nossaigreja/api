@@ -37,6 +37,11 @@
       "type": "belongsTo",
       "model": "EnderecoTipo",
       "foreignKey": ""
+    },
+    "municipio": {
+      "type": "belongsTo",
+      "model": "Municipio",
+      "foreignKey": ""
     }
   },
   "acls": [

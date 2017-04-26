@@ -47,51 +47,6 @@ function _create(app, filename, modelName) {
     app.models[modelName].create(json, function(err, data) {
       if (err) throw err;
       console.log('O modelo ' + modelName + ' foi criado com os dados: \n', data);
-            //Navega nos dados retornados
-      for (var i in data) {
-        if (typeof data[i] === 'object') {
-                //Obtêm a instância do objeto
-          app.models[modelName].findById(data[i].id, function(err, model) {
-            if (err) throw err;
-                  //Obtêm os relacionamento do modelo
-            var relations = app.models[modelName].definition.settings.relations;
-            for (var r in relations) {
-              if (typeof relations[r] === 'object') {
-                switch (relations[r].type) {
-                  case 'hasAndBelongsToMany':
-                    for (var j in json) {
-                      if (typeof json[j] === 'object') {
-                        if (json[j][r]) {
-                          var relationNameModel = relations[r].model;
-                                  //Tenta inserir os dados do relacionamento
-                          _createRelation(model, r, relationNameModel, json[j][r]);
-                        }
-                      }
-                    }
-                    break;
-                }
-              }
-            }
-          });
-        }
-      }
     });
-  });
-}
-
-/**
- * Cria a tabela e a popula com os dados do arquivo para o relacionamento.
- *
- * @param model
- * @param relationName
- * @param relationNameModel
- * @param data
- * @private
- */
-function _createRelation(model, relationName, relationNameModel, data) {
-  //Tenta inserir os dados do relacionamento
-  model[relationName].create(data, function(err, relation) {
-    if (err) throw err;
-    console.log('O modelo ' + relationNameModel + ' foi criado com os dados: \n', relation);
   });
 }

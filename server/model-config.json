@@ -127,5 +127,9 @@
   "MidiaSocial": {
     "dataSource": "db",
     "public": false
+  },
+  "UsuarioRecebimento": {
+    "dataSource": "db",
+    "public": true
   }
 }
