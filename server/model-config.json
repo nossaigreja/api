@@ -128,7 +128,7 @@
     "dataSource": "db",
     "public": false
   },
-  "UsuarioRecebimento": {
+  "IngressoTipo": {
     "dataSource": "db",
     "public": true
   }

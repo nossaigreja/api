@@ -17,7 +17,7 @@
         "complemento": "Recando dos NodeJS",
         "enderecoTipoId": 1,
         "municipioId": 1,
-        "usuarioRecebimentoId": 1
+        "ingressoTipoId": 1
       }
     ],
     "telefones": [

@@ -1,6 +1,6 @@
 {
-  "name": "UsuarioRecebimento",
-  "plural": "usuariorecebimento",
+  "name": "IngressoTipo",
+  "plural": "ingressotipos",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
