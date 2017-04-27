@@ -1,6 +1,6 @@
 {
-  "name": "FuncaoInstituicao",
-  "plural": "funcaoInstituicaos",
+  "name": "FuncaoInstitucional",
+  "plural": "funcaoinstitucionals",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

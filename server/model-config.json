@@ -112,7 +112,7 @@
     "dataSource": "db",
     "public": true
   },
-  "FuncaoInstituicao": {
+  "FuncaoInstitucional": {
     "dataSource": "db",
     "public": true
   },
