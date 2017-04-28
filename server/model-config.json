@@ -127,9 +127,5 @@
   "MidiaSocial": {
     "dataSource": "db",
     "public": false
-  },
-  "IngressoTipo": {
-    "dataSource": "db",
-    "public": true
   }
 }

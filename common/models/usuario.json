@@ -141,9 +141,9 @@
       "model": "MidiaSocial",
       "foreignKey": ""
     },
-    "ingressoTipo": {
+    "motivoEntrada": {
       "type": "belongsTo",
-      "model": "IngressoTipo",
+      "model": "MotivoEntrada",
       "foreignKey": ""
     }
   },
