@@ -112,7 +112,7 @@
     "dataSource": "db",
     "public": true
   },
-  "FuncaoInstituicao": {
+  "FuncaoInstitucional": {
     "dataSource": "db",
     "public": true
   },
@@ -127,9 +127,5 @@
   "MidiaSocial": {
     "dataSource": "db",
     "public": false
-  },
-  "IngressoTipo": {
-    "dataSource": "db",
-    "public": true
   }
 }
