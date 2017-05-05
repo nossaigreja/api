@@ -1,6 +1,7 @@
 'use strict';
 
 var lodash = require('lodash');
+var underscore = require('underscore');
 
 //var test = [1, 1, 2];
 //
@@ -77,33 +78,33 @@ var json = [{
                         "id": 225,
                         "objetoAprendizagemPaiId": 369,
                         "objetoAprendizagemParenteId": 63,
-                        //"objetoAprendizagemParente": {
-                        //    "titulo": "Medidas de peso",
-                        //    "descricao": "Você vai compreender quilograma e quilo como medidas de peso.INDEX  MAT1ALPAC3OE1",
-                        //    "videoId": "ZIPPvr3pARk",
-                        //    "duracao": "07:15",
-                        //    "imagemUrl": "https://i.ytimg.com/vi/ZIPPvr3pARk/mqdefault.jpg",
-                        //    "dtCriacao": "2017-01-27T20:07:53.000Z",
-                        //    "dtAtualizacao": "2017-02-17T22:44:33.000Z",
-                        //    "dtRemocao": null,
-                        //    "id": 63,
-                        //    "objetoAprendizagemTipoId": 1,
-                        //    "objetoAprendizagemStatusId": 1,
-                        //    "objetoAprendizagemMidiaId": 4,
-                        //    "objetoAprendizagemTipo": {
-                        //        "nome": "Elemento Educacional",
-                        //        "id": 1
-                        //    },
-                        //    "objetoAprendizagemStatus": {
-                        //        "nome": "Enviado",
-                        //        "id": 1
-                        //    },
-                        //    "objetoAprendizagemMidia": {
-                        //        "nome": "Vídeo",
-                        //        "id": 4
-                        //    },
-                        //    "alternativas": []
-                        //}
+                        "objetoAprendizagemParente": {
+                            "titulo": "Medidas de peso",
+                            "descricao": "Você vai compreender quilograma e quilo como medidas de peso.INDEX  MAT1ALPAC3OE1",
+                            "videoId": "ZIPPvr3pARk",
+                            "duracao": "07:15",
+                            "imagemUrl": "https://i.ytimg.com/vi/ZIPPvr3pARk/mqdefault.jpg",
+                            "dtCriacao": "2017-01-27T20:07:53.000Z",
+                            "dtAtualizacao": "2017-02-17T22:44:33.000Z",
+                            "dtRemocao": null,
+                            "id": 63,
+                            "objetoAprendizagemTipoId": 1,
+                            "objetoAprendizagemStatusId": 1,
+                            "objetoAprendizagemMidiaId": 4,
+                            "objetoAprendizagemTipo": {
+                                "nome": "Elemento Educacional",
+                                "id": 1
+                            },
+                            "objetoAprendizagemStatus": {
+                                "nome": "Enviado",
+                                "id": 1
+                            },
+                            "objetoAprendizagemMidia": {
+                                "nome": "Vídeo",
+                                "id": 4
+                            },
+                            "alternativas": []
+                        }
                     }
                 ]
             }
@@ -115,96 +116,106 @@ var filter = {
     include: [{
         relation: 'agrupadors',
         scope: {
-            include: {
+            include: [{
                 relation: 'objetoAprendizagemParente',
                 scope: {
                     include: {
                         relation: 'agrupadors',
                         scope: {
-                            contains: 'objetoAprendizagemParente'
+                            has: 'objetoAprendizagemParente'
                         }
                     }
                 }
-            },
-            contains: 'objetoAprendizagemParente'
+            }],
+            has: 'objetoAprendizagemParente'
         }
     }]
 };
 
 var RecursiveFilter = function () {};
 
-RecursiveFilter.prototype.contains = function(array, filter) {
+RecursiveFilter.prototype.has = function(array, filter) {
     var $this = this;
     //Executa o filtro
     function executeFilter(json, filter) {
-        var jsonRelation;
         var results;
         var result;
-        if (filter.scope) {
-            var contains = filter.scope.contains;
-            if (contains) {
-                jsonRelation = json[filter.relation];
-                if (lodash.isArray(jsonRelation)) {
-                    results = [];
-                    jsonRelation.forEach(function (item) {
-                        result = (item[contains]) ? true : false;
-                        results.push(result);
+        if(lodash.isArray(json)) {
+            results = lodash.remove(json, function(js) {
+                if(lodash.isArray(filter)) {
+                    filter.forEach(function(ft) {
+                        console.log('json array e filter array', js, ft);
                     });
-                    //Remove os duplicados
-                    lodash.uniq(results);
-                    //Se restou um, confere para ver ser vai remover
-                    if (results.length === 1) {
-                        result = results.shift();
-                        if (!result) return false;
-                    }
                 } else {
-                    result = (json[filter.relation][contains]) ? true : false
-                    if (!result) return false;
+                    return executeFilter(js, filter);
                 }
-            }
-            if (filter.scope.include) {
-                jsonRelation = json[filter.relation];
-                if (lodash.isArray(jsonRelation)) {
-                    results = [];
-                    jsonRelation.forEach(function (item) {
-                        var result = executeFilter(item[filter.scope.include.relation], filter.scope.include);
-                        results.push(result);
+            });
+            return results.length === 0;
+        } else {
+            if(lodash.isArray(filter)) {
+                //TODO Não entra aqui
+                filter.forEach(function(ft) {
+                    console.log('json object e filter array', json, ft);
+                });
+            } else {
+                //Se tem o filtro has
+                if (lodash.has(filter, 'has')) {
+                    //Verifica se contém a propriedade desejada
+                    result = lodash.has(json, filter.has);
+                    if (result) {
+                        //Se tem mais includes a percorrer
+                        if(filter.include) {
+                            if(lodash.isArray(json.include)) {
+                                console.log("include array");
+                            } else {
+                                return executeFilter(json[filter.include.relation], filter.include.scope);
+                            }
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+                //Se o json é um object e o filter é um array
+                if (lodash.isArray(filter.include)) {
+                    //filter.include.forEach(function(ft) {
+                    //    result = executeFilter(json, {include: ft});
+                    //    if(!result) return false;
+                    //});
+                    results = lodash.remove(filter, function(ft) {
+                        result = executeFilter(json, {include: ft});
                     });
-                    //Remove os duplicados
-                    lodash.uniq(results);
-                    //Se restou um, confere para ver ser vai remover
-                    if (results.length === 1) {
-                        return results.shift();
-                    }
-                } else {
-                    return executeFilter(jsonRelation[filter.scope.include.relation], filter.scope);
+                    return results.length === 0;
                 }
+                //Se o json é um object e o filter é um object
+                return executeFilter(json[filter.include.relation], filter.include.scope);
             }
         }
-        return true;
     }
     //Remove o valor se não estiver de acordo com o filtro
     return lodash.remove(array, function (json) {
-        if (lodash.isArray(filter.include)) {
-            var results = [];
-            filter.include.forEach(function (include) {
-                var result = executeFilter(json, include);
-                results.push(result);
-            });
-            //Remove os duplicados
-            lodash.uniq(results);
-            //Se restou um, confere para ver ser vai remover
-            if (results.length === 1) {
-                return results.shift();
-            }
-            return true;
-        } else if (lodash.isObject(filter.include)) {
-            return executeFilter(json, filter.include);
-        } else {
-            throw 'Sem suporte para o tipo ' + (typeof filter.include);
-        }
+        return executeFilter(json, filter);
+        //if (lodash.isArray(filter.include)) {
+        //    var results = [];
+        //    filter.include.forEach(function (include) {
+        //        console.log(include);
+        //        //var result = executeFilter(json, include);
+        //        //results.push(result);
+        //    });
+        //    //Remove os duplicados
+        //    lodash.uniq(results);
+        //    //Se restou um, confere para ver ser vai remover
+        //    if (results.length === 1) {
+        //        return results.shift();
+        //    }
+        //    return true;
+        //} else if (lodash.isObject(filter.include)) { console.log('object');
+        //    //return executeFilter(json, filter.include);
+        //} else {
+        //    throw 'Sem suporte para o tipo ' + (typeof filter.include);
+        //}
     });
 };
 
 var recursive = new RecursiveFilter();
-console.log(recursive.contains(json, filter));
+var teste = recursive.has(json, filter);
+console.log('------\n', 'Final: \n', teste);
